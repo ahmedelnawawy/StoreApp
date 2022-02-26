@@ -1,0 +1,28 @@
+<div style="margin-left : 30px;">
+    <h5 *ngIf="id==0 || id==null">Add Supplier </h5>
+    <h5 *ngIf="id">Update Supplier </h5>
+</div>
+<div class="container">
+    <form [formGroup]="supplierform" autocomplete="off">
+        <div class="row">
+            <div class="col-md-6 mb-1">
+                <label for="name" class="form-label">Name</label>
+                <div class="input-group has-validation">
+                    <input type="text" #name [ngClass]="{'form-control': true, 'is-invalid': supplierform.get('name')?.invalid &&
+                    (supplierform.get('name')?.dirty || supplierform.get('name')?.touched)}" id="name" name="name"
+                        formControlName="name" placeholder="Name">
+                    <div class="invalid-feedback">
+                        This field is required.
+                    </div>
+                </div>
+            </div>
+            <div class="mb-1">
+                <div class="btn-group" role="group" aria-label="Basic example">
+                    <button (click)="save()" [disabled]="supplierform.invalid" class="btn btn-primary" type="button">
+                        {{id==0 || id==null ?'Save':'Update'}}</button>
+                    <button (click)="clear()" class="btn btn-secondary" type="button">Reset </button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

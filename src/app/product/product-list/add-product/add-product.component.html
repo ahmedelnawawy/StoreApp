@@ -1,0 +1,99 @@
+<div class="container">
+    <form [formGroup]="productform" autocomplete="off">
+        <div class="row">
+            <div class="col-md-6 mb-1">
+                <label for="name" class="form-label">Name</label>
+                <div class="input-group has-validation">
+                    <input type="text" #name [ngClass]="{'form-control': true, 'is-invalid': productform.get('name')?.invalid &&
+                    (productform.get('name')?.dirty || productform.get('name')?.touched)}" id="name" name="name"
+                        formControlName="name" placeholder="Name">
+                    <div class="invalid-feedback">
+                        This field is required.
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 mb-1">
+                <label for="quantityPerUnit" class="form-label">Quantity Per Unit</label>
+                <div class="input-group has-validation">
+                    <select
+                        [ngClass]="{'form-select': true, 'is-invalid': productform.get('quantityPerUnitId')?.invalid &&
+                        (productform.get('quantityPerUnitId')?.dirty || productform.get('quantityPerUnitId')?.touched)}"
+                        aria-label="Default select example" formControlName="quantityPerUnitId">
+                        <option [ngValue]="item.id" *ngFor="let item of quantityPerUnitList">
+                            {{item.name}}
+                        </option>
+                    </select>
+                    <div class="invalid-feedback">
+                        This field is required.
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 mb-1">
+                <label for="reorderLevel" class="form-label">Reorder Level</label>
+                <div class="input-group has-validation">
+                    <input type="number" min="0" [ngClass]="{'form-control': true, 'is-invalid': productform.get('reorderLevel')?.invalid &&
+                    (productform.get('reorderLevel')?.dirty || productform.get('reorderLevel')?.touched)}"
+                        id="reorderLevel" name="reorderLevel" formControlName="reorderLevel" placeholder="reorderLevel">
+                    <div class="invalid-feedback">
+                        This field is required.
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 mb-1">
+                <label for="supplierId" class="form-label">Supplier </label>
+                <div class="input-group has-validation">
+                    <select [ngClass]="{'form-select': true, 'is-invalid': productform.get('supplierId')?.invalid &&
+                        (productform.get('supplierId')?.dirty || productform.get('supplierId')?.touched)}"
+                        aria-label="Default select example" formControlName="supplierId">
+                        <option [ngValue]="item.id" *ngFor="let item of SupplierList">
+                            {{item.name}}
+                        </option>
+                    </select>
+                    <div class="invalid-feedback">
+                        This field is required.
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 mb-1">
+                <label for="unitPrice" class="form-label">Unit Price</label>
+                <div class="input-group has-validation">
+                    <input type="number" min="0" [ngClass]="{'form-control': true, 'is-invalid': productform.get('unitPrice')?.invalid &&
+                    (productform.get('unitPrice')?.dirty || productform.get('unitPrice')?.touched)}" id="unitPrice"
+                        name="unitPrice" formControlName="unitPrice" placeholder="unitPrice">
+                    <div class="invalid-feedback">
+                        This field is required.
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 mb-1">
+                <label for="unitsInStock" class="form-label">Units In Stock</label>
+                <div class="input-group has-validation">
+                    <input type="number" min="0" [ngClass]="{'form-control': true, 'is-invalid': productform.get('unitsInStock')?.invalid &&
+                    (productform.get('unitsInStock')?.dirty || productform.get('unitsInStock')?.touched)}"
+                        id="unitsInStock" name="unitsInStock" formControlName="unitsInStock" placeholder="unitsInStock">
+                    <div class="invalid-feedback">
+                        This field is required.
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 mb-1">
+                <label for="unitsOnOrder" class="form-label">Units On Order</label>
+                <div class="input-group has-validation">
+                    <input type="number" min="0" [ngClass]="{'form-control': true, 'is-invalid': productform.get('unitsOnOrder')?.invalid &&
+                    (productform.get('unitsOnOrder')?.dirty || productform.get('unitsOnOrder')?.touched)}"
+                        id="unitsOnOrder" name="unitsOnOrder" formControlName="unitsOnOrder" placeholder="unitsOnOrder">
+                    <div class="invalid-feedback">
+                        This field is required.
+                    </div>
+                </div>
+            </div>
+            <div class="mb-1">
+                <div class="btn-group" role="group" aria-label="Basic example">
+                    <button (click)="save()" [disabled]="productform.invalid" class="btn btn-primary" type="button">
+                        {{id==0 || id==null ?'Save':'Update'}}</button>
+                    <button (click)="clear()" class="btn btn-secondary" type="button">Reset </button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

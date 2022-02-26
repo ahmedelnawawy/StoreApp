@@ -1,0 +1,80 @@
+<div style="margin-left : 30px;">
+    <h5>Products </h5>
+</div>
+<div class="container" style="margin-top: 20px;padding: 20px;border: 1px solid #ddd;border-radius: 10px;">
+    <div class="row" >
+        <div class="col-md-3 mb-1">
+            <label for="name" class="form-label">Name</label>
+            <div class="input-group has-validation">
+                <input type="text" class="form-control" [(ngModel)]="productFilter.name" id="name" name="name">
+            </div>
+        </div>
+        <div class="col-md-3 mb-1">
+            <label for="quantityPerUnit" class="form-label">Quantity Per Unit</label>
+            <div class="input-group has-validation">
+                <select class="form-select" aria-label="Default select example" [(ngModel)]="productFilter.quantityPerUnitId"  >
+                    <option [ngValue]="item.id" *ngFor="let item of quantityPerUnitList">
+                        {{item.name}}
+                    </option>
+                </select>
+            </div>
+        </div>
+        <div class="col-md-3 mb-1">
+            <label for="supplierId" class="form-label">Supplier </label>
+            <div class="input-group has-validation">
+                <select class="form-select" aria-label="Default select example" [(ngModel)]="productFilter.supplierId">
+                    <option [ngValue]="item.id" *ngFor="let item of SupplierList">
+                        {{item.name}}
+                    </option>
+                </select>
+            </div>
+        </div>
+        <div class="col-md-3 mb-1">
+            <div style="margin: 30px 0px 0px 50px; " >
+                <button class="btn btn-primary" (click)="LoadProducts()"> Search </button>
+                <button class="btn btn-secondary" style="margin-left:10px;" (click)="clearFilter()"> Reset </button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container" style="margin-top: 20px;">
+    <p-table [value]="ProductList" [paginator]="true" [rows]="10" [showCurrentPageReport]="true" responsiveLayout="scroll"
+        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+        [rowsPerPageOptions]="[10,25,50]">
+        <ng-template pTemplate="header">
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Quantity Per Unit</th>
+                <th>Reorder Level</th>
+                <th>Supplier</th>
+                <th>Unit Price</th>
+                <th>Units In Stock</th>
+                <th>Units On Order</th>
+                <th>Actions</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-product>
+            <tr [ngClass]="{'inActive': product.isActive == false}">
+                <td>{{product.id}}</td>
+                <td>{{product.name}}</td>
+                <td>{{product.quantityPerUnit.name}}</td>
+                <td>{{product.reorderLevel}}</td>
+                <td>{{product.supplier.name}}</td>
+                <td>{{product.unitPrice}}</td>
+                <td>{{product.unitsInStock}}</td>
+                <td>{{product.unitsOnOrder}}</td>
+                <td>
+                    <a pButton pRipple type="button" [routerLink]="['/update-product',product.id]" icon="pi pi-pencil"
+                        class="p-button-rounded"></a>
+                    <a pButton pRipple type="button" (click)="remove(product.id)" style="margin-left: 5px;"
+                        icon="pi pi-trash" class="p-button-rounded"></a>
+                </td>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="paginatorleft">
+            <a [routerLink]="['/add-product']" class="btn btn-primary">Add New</a>
+        </ng-template>
+    </p-table>
+</div>
+<p-toast ></p-toast>
